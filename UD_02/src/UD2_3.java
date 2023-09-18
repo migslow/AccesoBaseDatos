@@ -24,7 +24,7 @@ public class UD2_3 {
 		} catch (IOException e) {
 			System.out.println("Se ha producido un error: " + e.getMessage());
 		}
-		
+
 		resultado = fichero.delete();
 		if (resultado) {
 			System.out.println("El fichero se ha eliminado");
