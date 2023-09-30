@@ -28,12 +28,6 @@ public class AccesoBdatos {
 		conecta = null;
 	}
 
-	//
-	// m�todo insertar. Recibe la clave (n�mero de departamento), el nombre del
-	// departamento
-	// y la localidad y los inserta dentro de una fila en la tabla dept de la base
-	// de datos demodb
-	//
 	public boolean insertar(Integer clave, String nombre, String localidad) {
 		try {
 			// Se utilizan por seguridad y rapidez sentencias preparadas que ya conocemos de
