@@ -17,7 +17,7 @@ public class UD2_2 {
 					System.out.println("Existe el fichero.");
 				}
 			} else {
-				System.out.println("La ruta no existe");
+				System.out.println("La ruta " + f + "no existe");
 			}
 		}
 

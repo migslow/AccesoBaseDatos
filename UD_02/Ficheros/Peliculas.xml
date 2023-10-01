@@ -1,0 +1,26 @@
+<peliculas>
+  <pelicula>
+    <id>1</id>
+    <anyo>1990</anyo>
+    <titulo>Pelicula 1</titulo>
+    <descripcion>Era se una vez</descripcion>
+  </pelicula>
+  <pelicula>
+    <id>2</id>
+    <anyo>2021</anyo>
+    <titulo>Pelicula 2</titulo>
+    <descripcion>Esto empieza asi</descripcion>
+  </pelicula>
+  <pelicula>
+    <id>3</id>
+    <anyo>1999</anyo>
+    <titulo>Pelicula 3</titulo>
+    <descripcion>Si, soy yo</descripcion>
+  </pelicula>
+  <pelicula>
+    <id>4</id>
+    <anyo>1996</anyo>
+    <titulo>Pelicula 4</titulo>
+    <descripcion>En una realidad muy lejana</descripcion>
+  </pelicula>
+</peliculas>
