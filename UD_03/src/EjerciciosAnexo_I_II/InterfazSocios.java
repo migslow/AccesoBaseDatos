@@ -114,26 +114,29 @@ public class InterfazSocios {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/baloncesto", "root", "ROOT");
-					PreparedStatement comando = conexion.prepareStatement(
-							"select socioID, nombre, estatura, edad, localidad from socio where socioID="
-									+ textFieldBuscar.getText());
-					ResultSet registro = comando.executeQuery();
-					if (registro.next() == true) {
-						textFieldSocio.setText(registro.getString("socioID"));
-						textFieldNombre.setText(registro.getString("nombre"));
-						textFieldEstatura.setText(registro.getString("estatura"));
-						textFieldEdad.setText(registro.getString("edad"));
-						textFieldLocalidad.setText(registro.getString("localidad"));
-					} else {
-						btnNewButtonBuscar.setText("No existe un socio con ese id");
+				if (e.getSource() == btnNewButtonBuscar) {
+					try {
+						Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/baloncesto", "root",
+								"ROOT");
+						PreparedStatement comando = conexion.prepareStatement(
+								"select socioID, nombre, estatura, edad, localidad from socio where socioID="
+										+ textFieldBuscar.getText());
+						ResultSet registro = comando.executeQuery();
+						if (registro.next() == true) {
+							textFieldSocio.setText(registro.getString("socioID"));
+							textFieldNombre.setText(registro.getString("nombre"));
+							textFieldEstatura.setText(registro.getString("estatura"));
+							textFieldEdad.setText(registro.getString("edad"));
+							textFieldLocalidad.setText(registro.getString("localidad"));
+						} else {
+							btnNewButtonBuscar.setText("No existe un socio con ese id");
+						}
+						conexion.close();
+					} catch (SQLException ex) {
+						System.out.println("A ocurrido un problema con la consulta SQL" + ex.getMessage());
 					}
-					conexion.close();
-				} catch (SQLException ex) {
-					System.out.println("A ocurrido un problema con la consulta SQL" + ex.getMessage());
-				}
 
+				}
 			}
 		});
 
@@ -156,5 +159,15 @@ public class InterfazSocios {
 		JButton btnNuevo = new JButton("Nuevo");
 		btnNuevo.setBounds(322, 190, 89, 23);
 		frame.getContentPane().add(btnNuevo);
+
+		JButton btnNewButtonAnterior = new JButton("Anterior");
+		btnNewButtonAnterior.setEnabled(false);
+		btnNewButtonAnterior.setBounds(75, 211, 89, 23);
+		frame.getContentPane().add(btnNewButtonAnterior);
+
+		JButton btnNewButtonSiguiente = new JButton("Siguiente");
+		btnNewButtonSiguiente.setEnabled(false);
+		btnNewButtonSiguiente.setBounds(186, 211, 89, 23);
+		frame.getContentPane().add(btnNewButtonSiguiente);
 	}
 }
