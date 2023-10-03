@@ -116,7 +116,7 @@ public class InterfazSocios {
 				String searchText = textFieldBuscar.getText();
 				try {
 					Connection con = DriverManager
-							.getConnection("jdbc:mysql://localhost:3307/baloncesto?serverTimezone=UTC", "root", "root");
+							.getConnection("jdbc:mysql://localhost:3306/baloncesto?serverTimezone=UTC", "root", "ROOT");
 					String query = "SELECT socioID, nombre, estatura, edad, localidad FROM socio WHERE socioID=?";
 					PreparedStatement stmt = con.prepareStatement(query);
 					int id = Integer.parseInt(searchText);
@@ -180,22 +180,16 @@ public class InterfazSocios {
 		btnNewButtonSiguiente.setEnabled(false);
 		btnNewButtonSiguiente.setBounds(186, 211, 89, 23);
 		frame.getContentPane().add(btnNewButtonSiguiente);
+		btnNewButtonActualizar.addActionListener(new ActionListener() {
 
-		// ActionListener para el botón "Siguiente"
-		btnNewButtonSiguiente.addActionListener(new ActionListener() {
-			private int registroActual = -1;
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        registroActual++;
-		        mostrarRegistro(registroActual);
-		        
-		        int cantidadTotalRegistros = obtenerCantidadTotalRegistros();
-		        if (registroActual >= cantidadTotalRegistros - 1) {
-		            btnNewButtonSiguiente.setEnabled(false);
-		        }
-		    }
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
 		});
+		{
 
+		}
 
 	}
 }
