@@ -111,31 +111,42 @@ public class InterfazSocios {
 		btnNewButtonBuscar.setBounds(322, 62, 89, 23);
 		frame.getContentPane().add(btnNewButtonBuscar);
 		btnNewButtonBuscar.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == btnNewButtonBuscar) {
-					try {
-						Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/baloncesto", "root",
-								"ROOT");
-						PreparedStatement comando = conexion.prepareStatement(
-								"select socioID, nombre, estatura, edad, localidad from socio where socioID="
-										+ textFieldBuscar.getText());
-						ResultSet registro = comando.executeQuery();
-						if (registro.next() == true) {
-							textFieldSocio.setText(registro.getString("socioID"));
-							textFieldNombre.setText(registro.getString("nombre"));
-							textFieldEstatura.setText(registro.getString("estatura"));
-							textFieldEdad.setText(registro.getString("edad"));
-							textFieldLocalidad.setText(registro.getString("localidad"));
-						} else {
-							btnNewButtonBuscar.setText("No existe un socio con ese id");
-						}
-						conexion.close();
-					} catch (SQLException ex) {
-						System.out.println("A ocurrido un problema con la consulta SQL" + ex.getMessage());
+				String searchText = textFieldBuscar.getText();
+				try {
+					Connection con = DriverManager
+							.getConnection("jdbc:mysql://localhost:3307/baloncesto?serverTimezone=UTC", "root", "root");
+					String query = "SELECT socioID, nombre, estatura, edad, localidad FROM socio WHERE socioID=?";
+					PreparedStatement stmt = con.prepareStatement(query);
+					int id = Integer.parseInt(searchText);
+					stmt.setInt(1, id);
+
+					ResultSet rs = stmt.executeQuery();
+
+					if (rs.next()) {
+						textFieldSocio.setText(rs.getString("socioID"));
+						textFieldNombre.setText(rs.getString("nombre"));
+						textFieldEstatura.setText(rs.getString("estatura"));
+						textFieldEdad.setText(rs.getString("edad"));
+						textFieldLocalidad.setText(rs.getString("localidad"));
+
+					} else {
+						textFieldSocio.setText("");
+						textFieldNombre.setText("");
+						textFieldEstatura.setText("");
+						textFieldEdad.setText("");
+						textFieldLocalidad.setText("");
 					}
 
+					rs.close();
+					stmt.close();
+					con.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				} catch (NumberFormatException ex) {
+					textFieldNombre.setText("");
+					textFieldEstatura.setText("");
 				}
 			}
 		});
@@ -169,5 +180,22 @@ public class InterfazSocios {
 		btnNewButtonSiguiente.setEnabled(false);
 		btnNewButtonSiguiente.setBounds(186, 211, 89, 23);
 		frame.getContentPane().add(btnNewButtonSiguiente);
+
+		// ActionListener para el botón "Siguiente"
+		btnNewButtonSiguiente.addActionListener(new ActionListener() {
+			private int registroActual = -1;
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        registroActual++;
+		        mostrarRegistro(registroActual);
+		        
+		        int cantidadTotalRegistros = obtenerCantidadTotalRegistros();
+		        if (registroActual >= cantidadTotalRegistros - 1) {
+		            btnNewButtonSiguiente.setEnabled(false);
+		        }
+		    }
+		});
+
+
 	}
 }
