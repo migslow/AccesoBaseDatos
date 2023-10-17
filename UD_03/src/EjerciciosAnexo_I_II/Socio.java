@@ -1,19 +1,22 @@
 package EjerciciosAnexo_I_II;
 
 public class Socio {
-	private int socioID, estatura, edad;
-	private String nombre, localidad;
-
+	private int socioID;
+	private String nombre;
+	private int estatura;
+	private int edad;
+	private String localidad;
+	
 	public Socio() {
-		super();
+		
 	}
-
-	public Socio(int socioID, int estatura, int edad, String nombre, String localidad) {
+	
+	public Socio(int socioID, String nombre, int estatura, int edad, String localidad) {
 		super();
 		this.socioID = socioID;
+		this.nombre = nombre;
 		this.estatura = estatura;
 		this.edad = edad;
-		this.nombre = nombre;
 		this.localidad = localidad;
 	}
 
@@ -23,6 +26,14 @@ public class Socio {
 
 	public void setSocioID(int socioID) {
 		this.socioID = socioID;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public int getEstatura() {
@@ -41,14 +52,6 @@ public class Socio {
 		this.edad = edad;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public String getLocalidad() {
 		return localidad;
 	}
@@ -59,8 +62,11 @@ public class Socio {
 
 	@Override
 	public String toString() {
-		return "Socio [socioID=" + socioID + ", estatura=" + estatura + ", edad=" + edad + ", nombre=" + nombre
+		return "Socio [socioID=" + socioID + ", nombre=" + nombre + ", estatura=" + estatura + ", edad=" + edad
 				+ ", localidad=" + localidad + "]";
 	}
-
+	
+	
+	
+	
 }
