@@ -1,0 +1,22 @@
+https://spring.io/guides/gs/relational-data-access/
+
+Añadir después  por el final de la clase RelationalDataAccessApplication.java todo lo que viene a continuación hasta el final:
+
+// Añadido Alberto Carrera Martín Octubre 2022
+		// Ahora todos como se hacía sin stream ni lambdas
+		// Añadir en clase Customer.java los métodos getters y setters
+		// y también constructor vacío
+		//
+		log.info("Ahora sin utilizar stream ni lambdas");
+		List<Customer> lista= jdbcTemplate.query("SELECT id, first_name, last_name FROM customers WHERE first_name = ?",
+				new Object[] { "Josh" }, new RowMapper<Customer>() {
+					public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Customer customer = new Customer();
+						customer.setId(rs.getLong("id"));
+						customer.setFirstName(rs.getString("first_name"));
+						customer.setLastName(rs.getString("last_name"));
+						return customer;
+					}
+
+				});
+		log.info(lista.toString());
